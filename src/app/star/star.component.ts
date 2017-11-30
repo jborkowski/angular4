@@ -1,15 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation} from '@angular/core';
+
 
 @Component({
   selector: 'star',
-  template: `
-  <span (click)="onClick()"
-   class="glyphicon"
-   [class.glyphicon-star]="isSelected"
-   [class.glyphicon-star-empty]="!isSelected"
-   ></span>
-   <br/>
-  `,
+  templateUrl: './star.component.html',
   styles: [
     `
     .glyphicon {
@@ -22,7 +16,8 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
     }
     `    
   ],
-  styleUrls: ['./star.component.css']
+  styleUrls: ['./star.component.css'],
+  encapsulation: ViewEncapsulation.Emulated // Angular emulating concept of Shadow DOM in 99.9% you dont want to change it.
   
   //inputs: ['isFavorite'] // magic string
 })

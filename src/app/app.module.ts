@@ -11,6 +11,9 @@ import { AuthorsComponent } from './authors/authors.component';
 import { SummaryPipe } from './summary.pipe';
 import { TitlePipe } from './title.pipe';
 import { StarComponent } from './star/star.component';
+import { PanelComponent } from './panel/panel.component';
+import { LikeComponent } from './like/like.component';
+import { InputFormatDirective } from './input-format.directive';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { StarComponent } from './star/star.component';
     AuthorsComponent,
     SummaryPipe,
     StarComponent,
-    TitlePipe
+    TitlePipe,
+    PanelComponent,
+    LikeComponent,
+    InputFormatDirective
   ],
   imports: [
     BrowserModule,

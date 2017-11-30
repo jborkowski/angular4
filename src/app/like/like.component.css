@@ -1,0 +1,9 @@
+.glyphicon-heart {
+  font-size: 100px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.glyphicon-heart-hover {
+  color: deeppink;
+}

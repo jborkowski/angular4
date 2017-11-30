@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StarComponent } from './star.component';
+import { LikeComponent } from './like.component';
 
-describe('StarComponent', () => {
-  let component: StarComponent;
-  let fixture: ComponentFixture<StarComponent>;
+describe('LikeComponent', () => {
+  let component: LikeComponent;
+  let fixture: ComponentFixture<LikeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StarComponent ]
+      declarations: [ LikeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StarComponent);
+    fixture = TestBed.createComponent(LikeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
