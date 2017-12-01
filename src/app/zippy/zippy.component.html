@@ -1,0 +1,15 @@
+<ul class="list-group">
+  <li class="list-group-item"> 
+    {{ title }}
+    <span 
+      (click)="onClick()"
+      class="glyphicon pull-right"
+      [ngClass]="{
+        'glyphicon-chevron-up': isZipped,
+        'glyphicon-chevron-down': !isZipped
+      }" ></span>
+  </li>
+  <li class="list-group-item" *ngIf="isZipped">
+      <ng-content></ng-content>
+  </li>
+</ul>
