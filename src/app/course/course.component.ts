@@ -11,4 +11,8 @@ export class CourseComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(form) {
+    
+  }
+
 }
