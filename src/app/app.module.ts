@@ -1,4 +1,5 @@
-import { AuthorsService } from './authors.service';
+import { ErrorHandler } from '@angular/core';
+import { AuthorsService } from './services/authors.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
@@ -7,7 +8,7 @@ import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
 import { CourseComponent } from './course/course.component';
-import { CoursesService } from './courses.service';
+import { CoursesService } from './services/courses.service';
 import { AuthorsComponent } from './authors/authors.component';
 import { SummaryPipe } from './summary.pipe';
 import { TitlePipe } from './title.pipe';
@@ -22,6 +23,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostsService } from './services/posts.service';
+import { GlobalErrorHandler } from './common/app-error-handler';
 
 
 @NgModule({
@@ -52,7 +55,9 @@ import { PostsComponent } from './posts/posts.component';
   ],
   providers: [
     CoursesService, // DI, Singleton
-    AuthorsService
+    AuthorsService,
+    PostsService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler } // use custom error handler
   ],
   bootstrap: [AppComponent]
 })

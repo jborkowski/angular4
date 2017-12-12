@@ -1,6 +1,7 @@
-import { Http } from '@angular/http';
+import { BadInput } from './../common/bad-request';
+import { PostsService } from './../services/posts.service';
 import { Component, OnInit } from '@angular/core';
-import { port } from '_debugger';
+import { NotFoundError } from '../common/not-found-error';
 
 @Component({
   selector: 'app-posts',
@@ -10,44 +11,39 @@ import { port } from '_debugger';
 export class PostsComponent implements OnInit {
 
   data: any[];
-  private url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private http: Http) {
+  constructor(private service: PostsService) {
   }
 
   createPost(input: HTMLInputElement) {
     let post = { title: input.value };
     input.value = '';
 
-    this.http.get(this.url, JSON.stringify(post))
-            .subscribe(response => {
-              post['id'] = response.json().id;
-              this.data.splice(0, 0, post)
-            });0
+    this.service.create(post)
+                .subscribe(response => {
+                  post['id'] = response.id;
+                  this.data.splice(0, 0, post)
+                });
   }
 
   updatePost(post) {
-    this.http.patch(this.url + '/' + post.id , JSON.stringify({ isRead: true }))
-              .subscribe(response => {
-                console.log(response.json());
-              });
+    this.service.update(post).subscribe(d => console.log(d));
     //this.http.put(this.url, JSON.stringify(post))
   }
 
   deletePost(post) {
-    this.http.delete(this.url + '/' + post.id)
-    .subscribe(response => {
-
+    this.service.delete(post.id)
+    .subscribe( () => {
       let index = this.data.indexOf(post);
       this.data.splice(index, 1);
+    }, error => {
+      if (error instanceof NotFoundError)
+        alert("This post has already been deleted.");
+      else throw error;
     });
   }
 
   ngOnInit() {
-    this.http.get(this.url)
-    .subscribe(response => {
-      this.data = response.json()
-    });
+    this.service.getAll().subscribe(d => this.data = d);
   }
-
 }
