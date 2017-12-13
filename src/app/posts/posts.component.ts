@@ -2,6 +2,7 @@ import { BadInput } from './../common/bad-request';
 import { PostsService } from './../services/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { NotFoundError } from '../common/not-found-error';
+import { AppError } from '../common/app-error';
 
 @Component({
   selector: 'app-posts',
@@ -17,13 +18,22 @@ export class PostsComponent implements OnInit {
 
   createPost(input: HTMLInputElement) {
     let post = { title: input.value };
+    this.data.splice(0, 0, post);
+
     input.value = '';
 
     this.service.create(post)
                 .subscribe(response => {
                   post['id'] = response.id;
-                  this.data.splice(0, 0, post)
-                });
+                },
+              (error: AppError) => {
+                this.data.splice(0, 1);
+                
+                if (error instanceof BadInput) {
+                  // this.form.setErrors(error.originalError);
+                }
+                else throw error;
+              });
   }
 
   updatePost(post) {
@@ -32,11 +42,13 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post) {
+    let index = this.data.indexOf(post);
+    this.data.splice(index, 1);
+
     this.service.delete(post.id)
-    .subscribe( () => {
-      let index = this.data.indexOf(post);
-      this.data.splice(index, 1);
-    }, error => {
+    .subscribe(null, error => {
+      this.data.splice(index, 0, post);
+
       if (error instanceof NotFoundError)
         alert("This post has already been deleted.");
       else throw error;

@@ -25,6 +25,8 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
 import { PostsComponent } from './posts/posts.component';
 import { PostsService } from './services/posts.service';
 import { GlobalErrorHandler } from './common/app-error-handler';
+import { FollowersService } from './services/followers.service';
+import { FollowersComponent } from './followers/followers.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { GlobalErrorHandler } from './common/app-error-handler';
     SignupFormComponent,
     NewCourseFormComponent,
     ChangePasswordFormComponent,
-    PostsComponent
+    PostsComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { GlobalErrorHandler } from './common/app-error-handler';
     CoursesService, // DI, Singleton
     AuthorsService,
     PostsService,
+    FollowersService,
     { provide: ErrorHandler, useClass: GlobalErrorHandler } // use custom error handler
   ],
   bootstrap: [AppComponent]
