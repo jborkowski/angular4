@@ -3,7 +3,8 @@ import { AuthorsService } from './services/authors.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
@@ -27,6 +28,11 @@ import { PostsService } from './services/posts.service';
 import { GlobalErrorHandler } from './common/app-error-handler';
 import { FollowersService } from './services/followers.service';
 import { FollowersComponent } from './followers/followers.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './services/profile.service';
 
 
 @NgModule({
@@ -48,19 +54,31 @@ import { FollowersComponent } from './followers/followers.component';
     NewCourseFormComponent,
     ChangePasswordFormComponent,
     PostsComponent,
-    FollowersComponent
+    FollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    NotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'followers/:id/:username', component: ProfileComponent },      
+      { path: 'followers', component: FollowersComponent },
+      { path: 'posts', component: PostsComponent },
+      { path: '**', component: NotFoundComponent }
+    ])
   ],
   providers: [
     CoursesService, // DI, Singleton
     AuthorsService,
     PostsService,
     FollowersService,
+    ProfileService,
     { provide: ErrorHandler, useClass: GlobalErrorHandler } // use custom error handler
   ],
   bootstrap: [AppComponent]

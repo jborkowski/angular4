@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active current">
+          <a routerLink="/followers"
+             [queryParams]="{ page: 1, order: 'newset'}">
+             Followers
+          </a>
+        </li>
+        <li routerLinkActive="active current"><a routerLink="/posts">Posts</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

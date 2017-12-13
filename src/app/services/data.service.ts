@@ -17,6 +17,10 @@ export class DataService {
     return this.http.get(this.url).map(r => r.json()).catch(this.handleError);
   }
 
+  getById(id: any) {
+    return this.http.get(this.url + '/' + id).map(r => r.json()).catch(this.handleError);
+  }
+
   create(resource) {
 //    return Observable.throw(new AppError());
 
